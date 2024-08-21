@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -13,6 +14,9 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+// Filitering Speciality
+Route::get('/filter-by-speciality/{speciality_id}', [PatientController::class, 'loadDoctorBySpeciality']);
 
 Route::get('/doctor/dashboard', [DoctorController::class, 'loadDoctorDashboard'])
     ->name('doctor-dashboard')
@@ -35,9 +39,6 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Editing Speciality
     Route::get('/edit/speciality/{speciality}', [AdminController::class, 'loadEditSpecialityForm']);
-
-    // Deleting a speciality
-    Route::get('/admin/create/speciality', [AdminController::class, 'loadSpecialityForm']);
 });
 
 require __DIR__ . '/auth.php';

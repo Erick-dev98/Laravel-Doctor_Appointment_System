@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Doctor;
 use App\Models\Specialities;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,7 @@ class DoctorCreate extends Component
             'email' => 'required',
             'bio' => 'required',
             'hospital_name' => 'required',
-            'password' => 'required|confirmed|min:4',
+            'password' => 'required|min:4',
             'speciality_id' => 'required',
             'twitter' => 'string',
             'linkedin' => 'string',
@@ -48,6 +49,18 @@ class DoctorCreate extends Component
         $user->save();
 
         // doctors table
+        $doctor = new Doctor;
+        $doctor->bio = $this->bio;
+        $doctor->hospital_name = $this->hospital_name;
+        $doctor->speciality_id = $this->speciality_id;
+        $doctor->user_id = $user->id;
+        $doctor->experience = $this->experience;
+        $doctor->twitter = $this->twitter;
+        $doctor->linkedin = $this->linkedin;
+        $doctor->save();
+
+        session()->flash('message','Doctor Created Successfully');
+        return $this->redirect('/admin/doctors', navigate: true);
     }
 
     public function render()
