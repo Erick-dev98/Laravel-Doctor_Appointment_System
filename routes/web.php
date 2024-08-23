@@ -7,9 +7,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified', 'patient'])
+Route::group(['middleware' => 'patient'], function(){
+    Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified', 'patient'])  // role = 0
     ->name('dashboard');
+
+    Route::get('/my/appointments', [PatientController::class, 'loadMyAppointments'])
+        ->name('my-appointments');
+
+    Route::get('/articles', [PatientController::class, 'loadArticles'])
+    ->name('articles');
+
+    Route::get('/booking/page/{doctor_id}', [PatientController::class, 'loadBookingPage']);
+});
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
@@ -36,7 +46,6 @@ Route::group(['middleware' => 'admin'], function () {
 
     // specialities   
     Route::get('/admin/create/speciality', [AdminController::class, 'loadSpecialityForm']);
-
     // Editing Speciality
     Route::get('/edit/speciality/{speciality}', [AdminController::class, 'loadEditSpecialityForm']);
 });
