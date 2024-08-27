@@ -11,4 +11,22 @@ class DoctorController extends Controller
     {
         return view('doctor.dashboard');
     }
+
+    public function loadAllSchedules() 
+    {
+        return view('doctor.schedules');
+    }
+
+    public function loadAllAppointments() 
+    {
+        return view('doctor.appointments');
+    }
+
+    public function loadAddSheduleForm() 
+    {
+        return view('doctor.schedule-form');
+    }
 }
+
+
+

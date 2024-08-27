@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::group(['middleware' => 'patient'], function(){
+Route::group(['middleware' => 'patient'], function () {
     Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified', 'patient'])  // role = 0
-    ->name('dashboard');
+        ->middleware(['auth', 'verified', 'patient'])  // role = 0
+        ->name('dashboard');
 
     Route::get('/my/appointments', [PatientController::class, 'loadMyAppointments'])
         ->name('my-appointments');
 
     Route::get('/articles', [PatientController::class, 'loadArticles'])
-    ->name('articles');
+        ->name('articles');
 
     Route::get('/booking/page/{doctor_id}', [PatientController::class, 'loadBookingPage']);
 });
@@ -28,9 +28,18 @@ Route::view('profile', 'profile')
 // Filitering Speciality
 Route::get('/filter-by-speciality/{speciality_id}', [PatientController::class, 'loadDoctorBySpeciality']);
 
-Route::get('/doctor/dashboard', [DoctorController::class, 'loadDoctorDashboard'])
-    ->name('doctor-dashboard')
-    ->middleware('doctor');
+
+Route::group(['middleware' => 'doctor'], function () {
+    Route::get('/doctor/dashboard', [DoctorController::class, 'loadDoctorDashboard'])
+        ->name('doctor-dashboard');
+    Route::get('/my/schedules', [DoctorController::class, 'loadAllSchedules'])
+        ->name('my-schedules');
+    Route::get('/doctor/appointments', [DoctorController::class, 'loadAllAppointments'])
+        ->name('doctor-appointments');
+
+    Route::get('/create/schedule',[DoctorController::class, 'loadAddSheduleForm']);
+});
+
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'loadAdminDashboard'])
