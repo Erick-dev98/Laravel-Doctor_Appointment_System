@@ -22,9 +22,15 @@ class DoctorController extends Controller
         return view('doctor.appointments');
     }
 
-    public function loadAddSheduleForm() 
+    public function loadAddScheduleForm() 
     {
         return view('doctor.schedule-form');
+    }
+
+    public function loadEditScheduleForm($schedule_id) 
+    {
+        $id = $schedule_id;
+        return view('doctor.edit-schedule-form',compact('id'));
     }
 }
 

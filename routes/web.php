@@ -37,7 +37,8 @@ Route::group(['middleware' => 'doctor'], function () {
     Route::get('/doctor/appointments', [DoctorController::class, 'loadAllAppointments'])
         ->name('doctor-appointments');
 
-    Route::get('/create/schedule',[DoctorController::class, 'loadAddSheduleForm']);
+    Route::get('/create/schedule', [DoctorController::class, 'loadAddScheduleForm']);
+    Route::get('/edit/schedule/{schedule_id}', [DoctorController::class, 'loadEditScheduleForm']);
 });
 
 
@@ -57,6 +58,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/create/speciality', [AdminController::class, 'loadSpecialityForm']);
     // Editing Speciality
     Route::get('/edit/speciality/{speciality}', [AdminController::class, 'loadEditSpecialityForm']);
+
+    // appointments
+    Route::get('/admin/appointments', [AdminController::class, 'loadAllAppointments'])
+        ->name('admin-appointments');
 });
 
 require __DIR__ . '/auth.php';

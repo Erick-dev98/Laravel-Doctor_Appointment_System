@@ -15,4 +15,13 @@ class Appointment extends Model
         'appointment_date',
         'appointment_time',
     ];
+
+    // Define the relationship of the user and the doctor with the appointment
+    public function doctor(){
+        return $this->belongsTo(Doctor::class,'doctor_id');
+    }
+
+    public function patient(){
+        return $this->belongsTo(User::class,'patient_id');
+    }
 }

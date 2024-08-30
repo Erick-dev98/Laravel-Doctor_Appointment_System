@@ -22,6 +22,16 @@ class ScheduleComponent extends Component
         ];
     }
 
+    public function delete($id){
+        $data = DoctorSchedule::find($id);
+
+        $data->delete();
+
+        session()->flash('message','Schedule deleted successfully');
+
+        return $this->redirect('/my/schedules',navigate: true);
+    }
+
     public function render()
     {
         $user_id = auth()->user()->id;
