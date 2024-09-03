@@ -11,8 +11,7 @@ class AllAppointments extends Component
 
     public function mount(){
         // $this->all_appointments = Appointment::all();
-        $this->all_appointments = Appointment::with('patient','doctor')->get();
-        
+        $this->all_appointments = Appointment::with('patient','doctor')->get();        
     }
 
     public function render()
