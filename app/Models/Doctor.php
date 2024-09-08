@@ -17,6 +17,7 @@ class Doctor extends Model
         'twitter',
         'linkedin',
         'experience',
+        'is_featured',
     ];  
 
     // Creating a relationship between doctors and specialities

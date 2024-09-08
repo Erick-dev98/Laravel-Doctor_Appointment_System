@@ -32,4 +32,8 @@ class PatientController extends Controller
         // Now let's load the details of the doctor
         return view('patient.booking-page',compact('doctor'));
     }
+
+    public function loadAllDoctors(){
+        return view('patient.all-doctors');
+    }
 }

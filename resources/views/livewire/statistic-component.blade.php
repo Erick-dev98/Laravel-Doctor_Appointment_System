@@ -19,12 +19,12 @@
       <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
         <dt class="pe-3 text-center">
 
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_month_users_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last month</span>
 
         </dt>
         <dd class="text-start ps-3">
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_week_users_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last week</span>
         </dd>
       </dl>
@@ -47,12 +47,12 @@
       <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
         <dt class="pe-3 text-center">
 
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_month_doctor_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last month</span>
 
         </dt>
         <dd class="text-start ps-3">
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_week_doctor_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last week</span>
         </dd>
       </dl>
@@ -75,12 +75,12 @@
       <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
         <dt class="pe-3 text-center">
 
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_month_patient_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last month</span>
 
         </dt>
         <dd class="text-start ps-3">
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_week_patient_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last week</span>
         </dd>
       </dl>
@@ -133,12 +133,12 @@
       <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
         <dt class="pe-3 text-center">
 
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_month_appointments_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last month</span>
 
         </dt>
         <dd class="text-start ps-3">
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$last_week_appointments_count}}</span>
           <span class="block text-sm text-gray-500 dark:text-neutral-500">last week</span>
         </dd>
       </dl>
@@ -158,18 +158,6 @@
         </h3>
       </div>
 
-      <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
-        <dt class="pe-3 text-center">
-
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
-          <span class="block text-sm text-gray-500 dark:text-neutral-500">last month</span>
-
-        </dt>
-        <dd class="text-start ps-3">
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
-          <span class="block text-sm text-gray-500 dark:text-neutral-500">last week</span>
-        </dd>
-      </dl>
     </div>
     <!-- End Card -->
 
@@ -186,18 +174,6 @@
         </h3>
       </div>
 
-      <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
-        <dt class="pe-3 text-center">
-
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
-          <span class="block text-sm text-gray-500 dark:text-neutral-500">last month</span>
-
-        </dt>
-        <dd class="text-start ps-3">
-          <span class="text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
-          <span class="block text-sm text-gray-500 dark:text-neutral-500">last week</span>
-        </dd>
-      </dl>
     </div>
     <!-- End Card -->
     @endif

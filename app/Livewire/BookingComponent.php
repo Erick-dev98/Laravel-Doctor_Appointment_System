@@ -7,10 +7,11 @@ use App\Models\Appointment;
 use App\Models\DoctorSchedule;
 use Illuminate\Support\Carbon;
 use App\Mail\AppointmentCreated;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 class BookingComponent extends Component
-{    
+{
     public $doctor_details;
     public $selectedDate;
     public $availableDates = [];
@@ -23,7 +24,8 @@ class BookingComponent extends Component
         $this->fetchAvailableDates($this->doctor_details);
     }
 
-    public function bookAppointment($slot){
+    public function bookAppointment($slot)
+    {
         $carbonDate = Carbon::parse($this->selectedDate)->format('Y-m-d');
         $newAppointment = new Appointment();
         $newAppointment->patient_id = auth()->user()->id;
@@ -32,9 +34,27 @@ class BookingComponent extends Component
         $newAppointment->appointment_time = $slot;
         $newAppointment->save();
 
-        session()->flash('message','appointment with Dr.'.$this->doctor_details->doctorUser->name.' on '.$this->selectedDate.$slot.' was created!');
 
-        return $this->redirect('/my/appointments',navigate: true);
+        // Retrieve all admins' emails where the role is 2
+        $adminEmails = User::where('role', 2)->pluck('email')->toArray();
+        $appointmentEmailData = [
+            'date' => $this->selectedDate,
+            'time' => Carbon::parse($slot)->format('H:i A'),
+            'location' => '123 Medical Street, Health City',
+            'patient_name' => auth()->user()->name,
+            'patient_email' => auth()->user()->email,
+            'doctor_name' => $this->doctor_details->doctorUser->name,
+            'doctor_email' => $this->doctor_details->doctorUser->email,
+            'admin_email' => $adminEmails,
+            // 'appointment_type' => $this->appointment_type == 0 ? 'on-site' : 'live consultation',
+            'doctor_specialization' => $this->doctor_details->speciality->speciality_name,
+        ];
+        // dd($appointmentEmailData);
+        $this->sendAppointmentNotification($appointmentEmailData);
+
+        session()->flash('message', 'appointment with Dr.' . $this->doctor_details->doctorUser->name . ' on ' . $this->selectedDate . $slot . ' was created!');
+
+        return $this->redirect('/my/appointments', navigate: true);
     }
 
     public function fetchAvailableDates($doctor)
@@ -102,32 +122,40 @@ class BookingComponent extends Component
             }
 
             $this->timeSlots = $slots;
-                    // dd($this->timeSlots);
+            // dd($this->timeSlots);
 
         } else {
             $this->timeSlots = [];
         }
     }
 
-    // public function sendAppointmentNotification($appointmentData)
-    // {
-    //     // Send to Admin
-    //     $appointmentData['recipient_name'] = 'Admin Admin';
-    //     $appointmentData['recipient_role'] = 'admin';
-    //     Mail::to('shadrackmballah74@gmail.com')->send(new AppointmentCreated($appointmentData));
+    public function sendAppointmentNotification($appointmentData)
+    {
+        // Send to Admin
+        $appointmentData['recipient_name'] = 'Admin Admin';
+        $appointmentData['recipient_role'] = 'admin';
+        // Check if there are multiple admin emails and send to each one
+        if (is_array($appointmentData['admin_email'])) {
+            foreach ($appointmentData['admin_email'] as $adminEmail) {
+                Mail::to($adminEmail)->send(new AppointmentCreated($appointmentData));
+            }
+        } else {
+            // If it's a single email, send as usual
+            Mail::to($appointmentData['admin_email'])->send(new AppointmentCreated($appointmentData));
+        }
 
-    //     // Send to Doctor
-    //     $appointmentData['recipient_name'] = $appointmentData['doctor_name'];
-    //     $appointmentData['recipient_role'] = 'doctor';
-    //     Mail::to($appointmentData['doctor_email'])->send(new AppointmentCreated($appointmentData));
+        // Send to Doctor
+        $appointmentData['recipient_name'] = $appointmentData['doctor_name'];
+        $appointmentData['recipient_role'] = 'doctor';
+        Mail::to($appointmentData['doctor_email'])->send(new AppointmentCreated($appointmentData));
 
-    //     // Send to Patient
-    //     $appointmentData['recipient_name'] = $appointmentData['patient_name'];
-    //     $appointmentData['recipient_role'] = 'patient';
-    //     Mail::to($appointmentData['patient_email'])->send(new AppointmentCreated($appointmentData));
+        // Send to Patient
+        $appointmentData['recipient_name'] = $appointmentData['patient_name'];
+        $appointmentData['recipient_role'] = 'patient';
+        Mail::to($appointmentData['patient_email'])->send(new AppointmentCreated($appointmentData));
 
-    //     return 'Appointment notifications sent successfully!';
-    // }
+        return 'Appointment notifications sent successfully!';
+    }
 
     public function render()
     {

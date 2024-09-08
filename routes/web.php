@@ -19,6 +19,7 @@ Route::group(['middleware' => 'patient'], function () {
         ->name('articles');
 
     Route::get('/booking/page/{doctor_id}', [PatientController::class, 'loadBookingPage']);
+    
 });
 
 Route::view('profile', 'profile')
@@ -27,7 +28,7 @@ Route::view('profile', 'profile')
 
 // Filitering Speciality
 Route::get('/filter-by-speciality/{speciality_id}', [PatientController::class, 'loadDoctorBySpeciality']);
-
+Route::get('/all/doctors', [PatientController::class, 'loadAllDoctors']);
 
 Route::group(['middleware' => 'doctor'], function () {
     Route::get('/doctor/dashboard', [DoctorController::class, 'loadDoctorDashboard'])

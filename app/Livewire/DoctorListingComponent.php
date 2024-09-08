@@ -9,9 +9,24 @@ class DoctorListingComponent extends Component
 {
     public $doctors;
 
-    public function mount() {
-        $this->doctors = Doctor::with('speciality','doctorUser')->get();
- 
+    public function mount()
+    {
+        $this->doctors = Doctor::with('speciality', 'doctorUser')->get();
+    }
+
+    public function featured($id)
+    {
+        $doctor = Doctor::find($id);
+        
+        if ($doctor->is_featured == 1) {
+            $doctor->update([
+                'is_featured' => 0
+            ]);
+        } else {
+            $doctor->update([
+                'is_featured' => 1
+            ]);
+        }
     }
 
     public function render()
