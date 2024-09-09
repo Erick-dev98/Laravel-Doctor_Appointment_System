@@ -64,7 +64,7 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin-appointments');
 
     Route::get('/admin/reschedule/{appointment_id}', [AdminController::class, 'loadReschedulingForm'])
-        ->name('admin-appointments');
+        ->name('admin-reschedule');
 });
 
 require __DIR__ . '/auth.php';
