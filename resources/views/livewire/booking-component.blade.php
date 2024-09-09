@@ -1,9 +1,19 @@
 <div>
-  <div wire:loading>
+  <!-- <div wire:loading>
     <div class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading">
       <span class="sr-only">Loading...</span>
     </div>
     Processing..
+  </div> -->
+  <!-- Loading Message -->
+  <div wire:loading class="flex items-center space-x-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md p-2 mb-4">
+    <!-- Spinner Icon -->
+    <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </svg>
+    <!-- Loading Text -->
+    <span class="text-sm font-medium">Processing...</span>
   </div>
   <!-- Card Blog -->
   <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-10 bg-white border my-2  shadow-md">

@@ -19,7 +19,6 @@ Route::group(['middleware' => 'patient'], function () {
         ->name('articles');
 
     Route::get('/booking/page/{doctor_id}', [PatientController::class, 'loadBookingPage']);
-    
 });
 
 Route::view('profile', 'profile')
@@ -62,6 +61,9 @@ Route::group(['middleware' => 'admin'], function () {
 
     // appointments
     Route::get('/admin/appointments', [AdminController::class, 'loadAllAppointments'])
+        ->name('admin-appointments');
+
+    Route::get('/admin/reschedule/{appointment_id}', [AdminController::class, 'loadReschedulingForm'])
         ->name('admin-appointments');
 });
 

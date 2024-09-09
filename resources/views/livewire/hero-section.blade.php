@@ -2,17 +2,24 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <!-- Hero -->
-            <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Grid -->
                 <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
                     <div>
-                        <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">Access healthcare at your fingertips <span class="text-blue-600">Book an Appointment</span></h1>
-                        <p class="mt-3 text-lg text-gray-800 dark:text-neutral-400">Welcome to your one-stop solution for managing your health! Whether you need a quick consultation or a routine check-up, our app lets you book appointments with top-rated doctors at your convenience. Say goodbye to long waits and hello to seamless healthcare.</p>
+                        <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">Access healthcare at your fingertips</h1>
+                        <!-- <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">Access healthcare at your fingertips <span class="text-blue-600">Book an Appointment</span></h1> -->
+                        <!-- <p class="mt-3 text-lg text-gray-800 dark:text-neutral-400">Welcome to your one-stop solution for managing your health! Whether you need a quick consultation or a routine check-up, our app lets you book appointments with top-rated doctors at your convenience. Say goodbye to long waits and hello to seamless healthcare.</p> -->
 
                         <!-- Buttons -->
                         <div class="mt-7 grid gap-3 w-full sm:inline-flex">
                             <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/all/doctors">
                                 Book your Appointment
+                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </a>
+                            <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 focus:outline-none focus:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none" href="">
+                                See health articles
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m9 18 6-6-6-6" />
                                 </svg>
