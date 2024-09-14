@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" zoomAndPan="magnify" viewBox="0 0 150 37.5" height="50" preserveAspectRatio="xMidYMid meet" version="1.0">
+<!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" zoomAndPan="magnify" viewBox="0 0 150 37.5" height="50" preserveAspectRatio="xMidYMid meet" version="1.0">
     <defs>
         <filter x="0%" y="0%" width="100%" height="100%" id="652ee2b9d9">
             <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" color-interpolation-filters="sRGB" />
@@ -26,7 +26,7 @@
             </g>
         </g>
     </g>
-</svg>
+</svg> -->
 
 <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" zoomAndPan="magnify" viewBox="0 0 150 37.5" height="50" preserveAspectRatio="xMidYMid meet" version="1.0">
     <defs>
@@ -58,7 +58,7 @@
     </g>
 </svg> -->
 
-<!-- <svg width="164" height="38" viewBox="0 0 164 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="164" height="38" viewBox="0 0 164 38" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#filter0_dd_4155_249)">
         <rect x="3.1" y="2.1" width="31.8" height="31.8" rx="7.9" fill="white" />
         <rect x="3.1" y="2.1" width="31.8" height="31.8" rx="7.9" fill="url(#paint0_linear_4155_249)" />
@@ -103,4 +103,4 @@
             <stop offset="1" stop-color="#1A4688" />
         </linearGradient>
     </defs>
-</svg> -->
+</svg>

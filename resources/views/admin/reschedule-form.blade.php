@@ -4,5 +4,5 @@
             {{ __('Reschedule Appointment') }}
         </h2>
     </x-slot>
-    <livewire:reschedule-form />
+    <livewire:reschedule-form :appointment_id="$appointment_id" />
 </x-app-layout>
