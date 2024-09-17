@@ -13,13 +13,14 @@ class RescheduleForm extends Component
 {
     public $doctor_details;
     public $selectedDate;
+    public $appointment_details;
     public $availableDates = [];
     public $timeSlots = [];
 
     public function mount($appointment_id)
     {
-        $appointment_details = Appointment::find($appointment_id);
-        $this->doctor_details = $appointment_details->doctor;
+        $this->appointment_details = Appointment::find($appointment_id);
+        $this->doctor_details = $this->appointment_details->doctor;
         // Fetch the available dates when the booking page is loading
         $this->fetchAvailableDates($this->doctor_details);
     }

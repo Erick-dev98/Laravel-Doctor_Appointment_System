@@ -26,12 +26,24 @@
             </div>
             <!-- End Col -->
             <div class="text-center">
+                <h3 class="text-gray-500">Appointment details</h3>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex gap-x-3">
+                        <svg class="shrink-0 size-4 mt-0.5 text-blue-600 dark:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span class="text-gray-800 text-2xl dark:text-neutral-400">
+                            {{$appointment_details->appointment_date .', '. date('H:i A',strtotime($appointment_details->appointment_time))}}
+                        </span>
+                    </li>
+                </ul>
                 <label for="">Select Appointment Type</label>
                 <select wire:model="appointment_type" class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     <option selected="">Open this select menu</option>
                     <option value="0">On site</option>
                     <option value="1">Live consultation</option>
                 </select>
+
                 <h3>Select an Available Date</h3>
                 <input type="text" id="datepicker" autocomplete="off" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-gray-100 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Select Available date">
                 @if($selectedDate)
@@ -45,8 +57,8 @@
                         @foreach ($timeSlots as $slot)
                         <button class="m-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
                             type="button"
-                            wire:click="bookAppointment('{{$slot}}')"
-                            wire:confirm="Do you really want to book an appointment on {{ $selectedDate }}, {{ $slot }} ?">
+                            wire:click="updateAppointment('{{$slot}}')"
+                            wire:confirm="Do you really want to update this appointment from {{$appointment_details->appointment_date .', '. date('H:i A',strtotime($appointment_details->appointment_time))}} to {{ $selectedDate }}, {{ $slot }} ?">
                             {{ date('H:i',strtotime($slot)) }} </button>
                         @endforeach
                     </div>
