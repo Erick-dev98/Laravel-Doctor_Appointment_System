@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Mail\AppointmentCreated;
+use App\Mail\AppointmentUpdated;
 use App\Models\Appointment;
 use App\Models\DoctorSchedule;
 use App\Models\User;
@@ -29,20 +30,17 @@ class RescheduleForm extends Component
     public function bookAppointment($slot)
     {
         $carbonDate = Carbon::parse($this->selectedDate)->format('Y-m-d');
-        $newAppointment = new Appointment();
-        $newAppointment->update([
-            
+        $updateAppointment = Appointment::find($this->appointment_details->id);
+        $updateAppointment->update([
+            'appointment_date' => $carbonDate,
+            'appointment_time' => $slot,            
         ]);
-        $newAppointment->patient_id = auth()->user()->id;
-        $newAppointment->doctor_id = $this->doctor_details->id;
-        $newAppointment->appointment_date = $carbonDate;
-        $newAppointment->appointment_time = $slot;
-        $newAppointment->save();
-
 
         // Retrieve all admins' emails where the role is 2
         $adminEmails = User::where('role', 2)->pluck('email')->toArray();
         $appointmentEmailData = [
+            'old_date' => $this->appointment_details->appointment_date,
+            'old_time' => $this->appointment_details->appointment_time,
             'date' => $this->selectedDate,
             'time' => Carbon::parse($slot)->format('H:i A'),
             'location' => '123 Medical Street, Health City',
@@ -142,22 +140,22 @@ class RescheduleForm extends Component
         // Check if there are multiple admin emails and send to each one
         if (is_array($appointmentData['admin_email'])) {
             foreach ($appointmentData['admin_email'] as $adminEmail) {
-                Mail::to($adminEmail)->send(new AppointmentCreated($appointmentData));
+                Mail::to($adminEmail)->send(new AppointmentUpdated($appointmentData));
             }
         } else {
             // If it's a single email, send as usual
-            Mail::to($appointmentData['admin_email'])->send(new AppointmentCreated($appointmentData));
+            Mail::to($appointmentData['admin_email'])->send(new AppointmentUpdated($appointmentData));
         }
 
         // Send to Doctor
         $appointmentData['recipient_name'] = $appointmentData['doctor_name'];
         $appointmentData['recipient_role'] = 'doctor';
-        Mail::to($appointmentData['doctor_email'])->send(new AppointmentCreated($appointmentData));
+        Mail::to($appointmentData['doctor_email'])->send(new AppointmentUpdated($appointmentData));
 
         // Send to Patient
         $appointmentData['recipient_name'] = $appointmentData['patient_name'];
         $appointmentData['recipient_role'] = 'patient';
-        Mail::to($appointmentData['patient_email'])->send(new AppointmentCreated($appointmentData));
+        Mail::to($appointmentData['patient_email'])->send(new AppointmentUpdated($appointmentData));
 
         return 'Appointment notifications sent successfully!';
     }
