@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Mail\AppointmentCreated;
 use App\Models\Appointment;
 use App\Models\DoctorSchedule;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -23,6 +24,42 @@ class RescheduleForm extends Component
         $this->doctor_details = $this->appointment_details->doctor;
         // Fetch the available dates when the booking page is loading
         $this->fetchAvailableDates($this->doctor_details);
+    }
+
+    public function bookAppointment($slot)
+    {
+        $carbonDate = Carbon::parse($this->selectedDate)->format('Y-m-d');
+        $newAppointment = new Appointment();
+        $newAppointment->update([
+            
+        ]);
+        $newAppointment->patient_id = auth()->user()->id;
+        $newAppointment->doctor_id = $this->doctor_details->id;
+        $newAppointment->appointment_date = $carbonDate;
+        $newAppointment->appointment_time = $slot;
+        $newAppointment->save();
+
+
+        // Retrieve all admins' emails where the role is 2
+        $adminEmails = User::where('role', 2)->pluck('email')->toArray();
+        $appointmentEmailData = [
+            'date' => $this->selectedDate,
+            'time' => Carbon::parse($slot)->format('H:i A'),
+            'location' => '123 Medical Street, Health City',
+            'patient_name' => auth()->user()->name,
+            'patient_email' => auth()->user()->email,
+            'doctor_name' => $this->doctor_details->doctorUser->name,
+            'doctor_email' => $this->doctor_details->doctorUser->email,
+            'admin_email' => $adminEmails,
+            // 'appointment_type' => $this->appointment_type == 0 ? 'on-site' : 'live consultation',
+            'doctor_specialization' => $this->doctor_details->speciality->speciality_name,
+        ];
+        // dd($appointmentEmailData);
+        $this->sendAppointmentNotification($appointmentEmailData);
+
+        session()->flash('message', 'appointment with Dr.' . $this->doctor_details->doctorUser->name . ' on ' . $this->selectedDate . $slot . ' was created!');
+
+        return $this->redirect('/my/appointments', navigate: true);
     }
 
     public function fetchAvailableDates($doctor)
